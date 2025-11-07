@@ -98,10 +98,6 @@
             <url>https://repo.aikar.co/content/groups/aikar/</url>
         </repository>
         <repository>
-            <id>hnt8</id>
-            <url>https://java.hnt8.net</url>
-        </repository>
-        <repository>
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
@@ -150,12 +146,14 @@
             <version>0.5.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <!-- Temporarily commented out due to repository connectivity issues
         <dependency>
             <groupId>net.hnt8.advancedban</groupId>
             <artifactId>AdvancedBanX</artifactId>
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
+        -->
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
