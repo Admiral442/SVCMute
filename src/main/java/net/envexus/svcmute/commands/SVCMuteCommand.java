@@ -2,6 +2,7 @@ package net.envexus.svcmute.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
@@ -35,6 +36,7 @@ public class SVCMuteCommand extends BaseCommand {
     @Default
     @Syntax("<player> <time>")
     @Description("Mute a player from voice chat for a specified time.")
+    @CommandCompletion("@players 1s|5m|1h|3d|7d|14d|30d")
     public void onMute(CommandSender sender, String playerName, String timeStr) {
         Player player = Bukkit.getPlayer(playerName);
         if (player == null) {
@@ -95,3 +97,4 @@ public class SVCMuteCommand extends BaseCommand {
         return durationMillis;
     }
 }
+
