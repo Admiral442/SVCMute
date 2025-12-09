@@ -48,6 +48,8 @@ public class SCVUnmuteCommand extends BaseCommand {
 
         sender.sendMessage(playerName + " has been unmuted.");
         db.removeMute(playerUUID.toString());
+        db.markMuteAsManuallyUnmuted(playerUUID.toString(), 
+            sender instanceof Player ? sender.getName() : "Console");
         integrationManager.removeMutedPlayer(playerUUID);
     }
 }

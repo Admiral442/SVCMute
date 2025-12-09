@@ -54,6 +54,9 @@ public class SVCMuteCommand extends BaseCommand {
         long unmuteTime = System.currentTimeMillis() + muteDurationMillis;
 
         db.addMute(playerUUID.toString(), unmuteTime);
+        db.addMuteHistory(playerUUID.toString(), playerName, 
+            sender instanceof Player ? sender.getName() : "Console", 
+            System.currentTimeMillis(), unmuteTime, muteDurationMillis);
         sender.sendMessage(playerName + " has been muted for " + timeStr + ".");
 
         integrationManager.addMutedPlayer(playerUUID, unmuteTime);
@@ -63,6 +66,7 @@ public class SVCMuteCommand extends BaseCommand {
             Long storedUnmuteTime = db.getUnmuteTime(playerUUID.toString());
             if (storedUnmuteTime != null && storedUnmuteTime <= System.currentTimeMillis()) {
                 db.removeMute(playerUUID.toString());
+                db.markMuteAsExpired(playerUUID.toString());
                 integrationManager.removeMutedPlayer(playerUUID);
             }
         }, muteDurationMillis / 50L); // Bukkit scheduler uses ticks, so divide by 50
@@ -88,10 +92,10 @@ public class SVCMuteCommand extends BaseCommand {
                     durationMillis = TimeUnit.DAYS.toMillis(amount);
                     break;
                 default:
-                    return -1; // Invalid unit
+                    return -1; 
             }
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
-            return -1; // Invalid format
+            return -1; 
         }
 
         return durationMillis;
